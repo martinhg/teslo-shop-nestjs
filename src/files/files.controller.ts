@@ -14,13 +14,16 @@ export class FilesController {
       fileFilter: fileFilter,
       // limits: { fileSize: 1000 },
       storage: diskStorage({
-        destination: './static/uploads',
+        destination: './static/products',
         filename: fileNamer,
       }),
     }),
   )
   uploadProductFile(@UploadedFile() file: Express.Multer.File) {
     if (!file) throw new BadRequestException('Make sure that the file is an image');
-    return this.filesService.create(file);
+
+    const secureUrl = `${file.filename}`;
+
+    return { secureUrl };
   }
 }
