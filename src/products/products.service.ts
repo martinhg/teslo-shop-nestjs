@@ -45,7 +45,11 @@ export class ProductsService {
   }
 
   async findAll(paginationDto: PaginationDto) {
-    const { limit = 10, offset = 0 } = paginationDto;
+    console.log({
+      paginationDto,
+    });
+
+    const { limit, offset } = paginationDto;
 
     const products = await this.productRepository.find({
       take: limit,
